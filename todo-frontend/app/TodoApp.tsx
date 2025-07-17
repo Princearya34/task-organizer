@@ -189,17 +189,19 @@ function TodoAppInner() {
       selector: (row) => row.title,
       sortable: true,
       cell: (row) => (
-        <span
-          onClick={() => toggleTodo(row.id)}
-          className={`cursor-pointer font-medium transition-colors ${
-            row.isCompleted
-              ? "line-through text-green-600 hover:text-green-700"
-              : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
-          }`}
-          title="Click to toggle completion status"
-        >
-          {row.title}
-        </span>
+        <div className="flex items-center">
+          <span
+            onClick={() => toggleTodo(row.id)}
+            className={`cursor-pointer font-medium transition-colors ${
+              row.isCompleted
+                ? "line-through text-green-600 hover:text-green-700"
+                : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
+            }`}
+            title="Click to toggle completion status"
+          >
+            {row.title}
+          </span>
+        </div>
       ),
     },
     {
@@ -207,9 +209,11 @@ function TodoAppInner() {
       selector: (row) => row.dueDate || "",
       sortable: true,
       cell: (row) => (
-        <span className="text-gray-600 dark:text-gray-400">
-          {row.dueDate ? new Date(row.dueDate).toLocaleDateString() : "—"}
-        </span>
+        <div className="flex items-center">
+          <span className="text-gray-600 dark:text-gray-400">
+            {row.dueDate ? new Date(row.dueDate).toLocaleDateString() : "—"}
+          </span>
+        </div>
       ),
     },
     {
@@ -217,19 +221,21 @@ function TodoAppInner() {
       selector: (row) => (row.isCompleted ? "Completed" : "Pending"),
       sortable: true,
       cell: (row) => (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-          row.isCompleted
-            ? "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-            : "bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
-        }`}>
-          {row.isCompleted ? "✅ Completed" : "⏳ Pending"}
-        </span>
+        <div className="flex items-center">
+          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+            row.isCompleted
+              ? "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+              : "bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
+          }`}>
+            {row.isCompleted ? "✅ Completed" : "⏳ Pending"}
+          </span>
+        </div>
       ),
     },
     {
       name: "Actions",
       cell: (row) => (
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-center space-x-2">
           <button
             onClick={() => startEdit(row.id)}
             className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900 rounded-md transition-colors"
@@ -257,8 +263,8 @@ function TodoAppInner() {
     <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <div className="space-y-6">
         {/* Header with User Info and Logout */}
-        <div className="flex justify-between items-center">
-          <div className="text-center flex-1">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div className="text-center sm:text-left flex-1">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
               📝 Todo List
             </h1>
@@ -266,7 +272,7 @@ function TodoAppInner() {
               Organize your tasks efficiently
             </p>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-center sm:justify-end space-x-4">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -285,10 +291,11 @@ function TodoAppInner() {
             </button>
           </div>
         </div>
+
         {/* Summary */}
         {summary && (
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 rounded-lg p-4">
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900 rounded-lg p-6">
+            <div className="flex flex-wrap justify-center gap-8 text-sm">
               <div className="flex items-center">
                 <span className="text-2xl mr-2">📊</span>
                 <span className="text-gray-700 dark:text-gray-300">Total: </span>
@@ -307,6 +314,7 @@ function TodoAppInner() {
             </div>
           </div>
         )}
+
         {/* Filters */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -314,7 +322,7 @@ function TodoAppInner() {
             Filters
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div>
+            <div className="flex flex-col">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Status
               </label>
@@ -328,7 +336,7 @@ function TodoAppInner() {
                 <option value="false">Pending</option>
               </select>
             </div>
-            <div>
+            <div className="flex flex-col">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Due Date
               </label>
@@ -339,7 +347,7 @@ function TodoAppInner() {
                 className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               />
             </div>
-            <div>
+            <div className="flex flex-col">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Search
               </label>
@@ -351,10 +359,10 @@ function TodoAppInner() {
                 className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               />
             </div>
-            <div className="flex items-end">
+            <div className="flex flex-col justify-end">
               <button
                 onClick={resetFilters}
-                className="w-full bg-gray-600 text-white py-3 px-4 rounded-md hover:bg-gray-700 transition-colors flex items-center justify-center"
+                className="w-full bg-gray-600 text-white py-3 px-4 rounded-md hover:bg-gray-700 transition-colors flex items-center justify-center h-12"
               >
                 <span className="mr-2">🔄</span>
                 Reset Filters
@@ -362,6 +370,7 @@ function TodoAppInner() {
             </div>
           </div>
         </div>
+
         {/* Messages */}
         {message && (
           <div className={`rounded-lg p-4 ${
@@ -377,14 +386,15 @@ function TodoAppInner() {
             </div>
           </div>
         )}
+
         {/* Add/Edit Todo Form */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
             <span className="text-xl mr-2">{editId ? "✏️" : "➕"}</span>
             {editId ? "Edit Task" : "Add New Task"}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="flex flex-col">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Task Title *
               </label>
@@ -396,7 +406,7 @@ function TodoAppInner() {
                 className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               />
             </div>
-            <div>
+            <div className="flex flex-col">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Due Date
               </label>
@@ -407,8 +417,8 @@ function TodoAppInner() {
                 className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               />
             </div>
-            <div className="flex items-end">
-              <div className="flex space-x-2 w-full">
+            <div className="flex flex-col justify-end">
+              <div className="flex space-x-2 w-full h-12">
                 <button
                   onClick={editId ? updateTodo : addTodo}
                   disabled={submitting}
@@ -438,7 +448,7 @@ function TodoAppInner() {
             </div>
           </div>
           {editId && (
-            <div className="mt-4">
+            <div className="mt-6 flex items-center">
               <label className="flex items-center space-x-2 text-sm text-gray-700 dark:text-gray-300">
                 <input
                   type="checkbox"
@@ -451,10 +461,11 @@ function TodoAppInner() {
             </div>
           )}
         </div>
+
         {/* Todos Table */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                 <span className="text-xl mr-2">📋</span>
                 Your Tasks ({filteredTodos.length})

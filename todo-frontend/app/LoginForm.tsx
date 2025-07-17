@@ -20,7 +20,7 @@ export function LoginForm({ onLogin }: { onLogin: (authResponse: AuthResponse) =
   const [message, setMessage] = useState<{ type: "error" | "success"; text: string } | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const apiUrl = "http://localhost:5088/api/auth";
+  const apiUrl = "https://todoapp-princearya-brc9cvdmbegqcwfk.eastasia-01.azurewebsites.net/api/auth";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

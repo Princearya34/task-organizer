@@ -29,7 +29,7 @@ function TodoAppInner() {
   const [message, setMessage] = useState<{ type: "error" | "success"; text: string } | null>(null);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const apiUrl = "http://localhost:5088/api/todo";
+  const apiUrl = "https://todoapp-princearya-brc9cvdmbegqcwfk.eastasia-01.azurewebsites.net/api/todo";
 
   useEffect(() => {
     if (message) {

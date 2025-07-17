@@ -15,7 +15,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        builder => builder.WithOrigins("http://localhost:3000")
+        builder => builder.WithOrigins("https://task-organizer-phi.vercel.app")
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });

@@ -1,7 +1,7 @@
 # TodoApp: Advanced Full-Stack Task Management Application
 
 ## Overview
-**TodoApp** is a comprehensive task management solution built with modern web technologies and deployed on enterprise-grade cloud infrastructure. It features a secure ASP.NET Core Web API backend hosted on **Microsoft Azure** and a responsive React frontend deployed on **Vercel**, providing users with an intuitive platform to organize, track, and manage their daily tasks efficiently with advanced features like email reminders and detailed task descriptions.
+**TodoApp** is a comprehensive task management solution built with modern web technologies and deployed on enterprise-grade cloud infrastructure. It features a secure ASP.NET Core Web API backend hosted on **Microsoft Azure** and a responsive Next.js frontend deployed on **Vercel**, providing users with an intuitive platform to organize, track, and manage their daily tasks efficiently with advanced features like email reminders and detailed task descriptions.
 
 ---
 
@@ -67,7 +67,7 @@
 | Component         | Technology                      |
 |------------------|---------------------------------|
 | **Backend**      | ASP.NET Core 8.0, C#          |
-| **Frontend**     | React 18, TypeScript          |
+| **Frontend**     | Next.js 14, TypeScript        |
 | **Database**     | Azure SQL Database             |
 | **Backend Host** | Microsoft Azure App Service    |
 | **Frontend Host**| Vercel                         |
@@ -83,8 +83,8 @@
 ## 🌐 Live Application
 
 ### Production URLs
-- **Frontend (Vercel)**: [https://your-app.vercel.app](https://your-app.vercel.app)
-- **Backend API (Azure)**: [https://your-api.azurewebsites.net](https://your-api.azurewebsites.net)
+- **Frontend (Vercel)**: https://flowtask-phi.vercel.app/
+- **Backend API (Azure)**: https://todoapp-princearya-brc9cvdmbegqcwfk.eastasia-01.azurewebsites.net
 - **Database**: Azure SQL Database (Managed)
 
 ---
@@ -98,7 +98,7 @@
 - **Azure Key Vault**: Secure configuration management
 
 ### Frontend Deployment (Vercel)
-- **Vercel Platform**: Optimized React hosting
+- **Vercel Platform**: Optimized Next.js hosting
 - **CDN Integration**: Global content delivery
 - **Automatic Deployments**: Git-based CI/CD
 - **Environment Variables**: Secure configuration
@@ -107,8 +107,8 @@
 
 ## 📱 Screenshots & Demo
 
-![Desktop View](https://drive.google.com/file/d/1EN2wSePlIW5C-XBYW-8wfxrGneyUWi9K/view?usp=sharing)
-
+![Desktop View](https://github-production-user-asset-6210df.s3.amazonaws.com/109575282/469796342-5c09549c-5b8e-4998-b0eb-7d48fd35a0b5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250723T135306Z&X-Amz-Expires=300&X-Amz-Signature=553135230db4f8c0c6184fef85baec54efa57c86c034f33c75d0fcfb3ce14181&X-Amz-SignedHeaders=host)
+![Desktop View](https://github-production-user-asset-6210df.s3.amazonaws.com/109575282/469797922-085cd8c9-03f8-4c73-8f09-6ca9dd7241f9.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250723T135708Z&X-Amz-Expires=300&X-Amz-Signature=5902179cd78bd33a8b21d6846c0623725497af347c5ce4411de2c095733024ad&X-Amz-SignedHeaders=host)
 ---
 
 ## 🛠️ Installation & Setup
@@ -161,8 +161,8 @@ npm install
 cp .env.example .env.local
 
 # Update environment variables
-echo "REACT_APP_API_URL=https://localhost:7001/api" >> .env.local
-echo "REACT_APP_ENV=development" >> .env.local
+echo "NEXT_PUBLIC_API_URL=https://localhost:7001/api" >> .env.local
+echo "NODE_ENV=development" >> .env.local
 
 # Start development server
 npm run dev
@@ -203,9 +203,9 @@ npm run dev
 
 ### Frontend Configuration (`.env.production`)
 ```bash
-REACT_APP_API_URL=https://your-api.azurewebsites.net/api
-REACT_APP_ENV=production
-REACT_APP_VERSION=2.0.0
+NEXT_PUBLIC_API_URL=https://your-api.azurewebsites.net/api
+NODE_ENV=production
+NEXT_PUBLIC_APP_VERSION=2.0.0
 ```
 
 ---
@@ -224,8 +224,8 @@ EmailSettings__Password=your-app-password
 
 ### Required Frontend Variables
 ```bash
-REACT_APP_API_URL=your-backend-api-url
-REACT_APP_ENV=production
+NEXT_PUBLIC_API_URL=your-backend-api-url
+NODE_ENV=production
 ```
 
 ---
@@ -239,8 +239,8 @@ REACT_APP_ENV=production
 - **Error Tracking**: Exception handling and reporting
 
 ### Frontend Monitoring (Vercel)
-- **Web Vitals**: Core web performance metrics
-- **Analytics**: User interaction tracking
+- **Next.js Analytics**: Core web performance metrics
+- **Web Vitals**: User experience tracking
 - **Error Boundary**: React error handling
 - **Bundle Analysis**: Optimization insights
 
@@ -293,7 +293,7 @@ REACT_APP_ENV=production
 ### Development Workflow
 ```bash
 # Fork the repository
-git clone https://github.com/your-username/task-organizer.git
+git clone https://github.com/Princearya34/task-organizer.git
 
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -320,12 +320,11 @@ git push origin feature/amazing-feature
 ### Getting Help
 - **GitHub Issues**: [Report bugs and request features](https://github.com/Princearya34/task-organizer/issues)
 - **Documentation**: Check this README and code comments
-- **Email Support**: support@todoapp.com
 
 ### Developer Information
 - **GitHub**: [@Princearya34](https://github.com/Princearya34)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
-- **Portfolio**: [Your Portfolio Website](https://your-portfolio.com)
+- **LinkedIn**: https://www.linkedin.com/in/prince-kumar-arya/
+- **Portfolio**: [Link](https://prince-five-sigma.vercel.app/)
 
 ---
 
@@ -339,7 +338,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Microsoft Azure**: For reliable cloud hosting
 - **Vercel**: For seamless frontend deployment
-- **React Community**: For excellent documentation and support
+- **Next.js Community**: For excellent documentation and support
 - **ASP.NET Core Team**: For robust backend framework
 - **Contributors**: Thanks to all who contributed to this project
 

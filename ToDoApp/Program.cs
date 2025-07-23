@@ -11,11 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Register the background service for reminders
+builder.Services.AddHostedService<ReminderBackgroundService>();
+
 // Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        builder => builder.WithOrigins("https://task-organizer-phi.vercel.app")
+        builder => builder.WithOrigins("https://flowtask-phi.vercel.app")
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });

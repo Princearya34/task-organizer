@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using ToDoApp.Data;
 using ToDoApp.Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace ToDoApp.Controllers
 {
@@ -65,10 +64,10 @@ namespace ToDoApp.Controllers
                 var userId = GetCurrentUserId();
                 var item = await _context.TodoItems
                     .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
-                
+
                 if (item == null)
                     return NotFound();
-                
+
                 return Ok(item);
             }
             catch (UnauthorizedAccessException)
@@ -102,7 +101,7 @@ namespace ToDoApp.Controllers
                 var result = await query
                     .OrderByDescending(x => x.CreatedAt)
                     .ToListAsync();
-                
+
                 return Ok(result);
             }
             catch (UnauthorizedAccessException)
@@ -153,7 +152,9 @@ namespace ToDoApp.Controllers
                 var item = new TodoItem
                 {
                     Title = request.Title.Trim(),
+                    Description = request.Description?.Trim(),
                     DueDate = request.DueDate,
+                    ReminderDateTime = request.ReminderDateTime,
                     IsCompleted = false,
                     UserId = userId,
                     CreatedAt = DateTime.UtcNow
@@ -161,6 +162,8 @@ namespace ToDoApp.Controllers
 
                 _context.TodoItems.Add(item);
                 await _context.SaveChangesAsync();
+
+                // TODO: Implement reminder scheduling logic here if ReminderDateTime is set
 
                 return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
             }
@@ -195,10 +198,15 @@ namespace ToDoApp.Controllers
                     return NotFound();
 
                 item.Title = request.Title.Trim();
+                item.Description = request.Description?.Trim();
                 item.DueDate = request.DueDate;
+                item.ReminderDateTime = request.ReminderDateTime;
                 item.IsCompleted = request.IsCompleted;
 
                 await _context.SaveChangesAsync();
+
+                // TODO: Implement reminder rescheduling logic here if ReminderDateTime is updated
+
                 return NoContent();
             }
             catch (UnauthorizedAccessException)
@@ -267,31 +275,5 @@ namespace ToDoApp.Controllers
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }
-    }
-}
-
-// Additional request models for better validation
-namespace ToDoApp.Models
-{
-    public class CreateTodoRequest
-    {
-        [Required]
-        [StringLength(500, MinimumLength = 1)]
-        public string Title { get; set; } = string.Empty;
-        
-        public DateTime? DueDate { get; set; }
-    }
-
-    public class UpdateTodoRequest
-    {
-        public int Id { get; set; }
-        
-        [Required]
-        [StringLength(500, MinimumLength = 1)]
-        public string Title { get; set; } = string.Empty;
-        
-        public DateTime? DueDate { get; set; }
-        
-        public bool IsCompleted { get; set; }
     }
 }
